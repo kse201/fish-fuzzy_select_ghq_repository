@@ -10,6 +10,9 @@ function peco_select_ghq_repository
   if [ $line ]
     ghq root | read dir
     cd $dir/$line
+    if [ $TMUX ]
+      tmux rename-window (basename $line)
+    end
     commandline -f repaint
   end
 end
