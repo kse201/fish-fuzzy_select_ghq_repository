@@ -8,8 +8,8 @@ function peco_select_ghq_repository
   ghq list | peco $peco_flags | read line
 
   if [ $line ]
-    ghq root | read dir
-    cd $dir/$line
+    set full_path (ghq list --full-path --exact $line)
+    cd $full_path
     if [ $TMUX ]
       tmux rename-window (basename $line)
     end
