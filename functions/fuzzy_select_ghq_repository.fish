@@ -1,11 +1,11 @@
-function peco_select_ghq_repository
+function fuzzy_select_ghq_repository
   set -l query (commandline)
 
   if test -n $query
-    set peco_flags --query "$query"
+    set query "$query"
   end
 
-  ghq list | peco $peco_flags | read line
+  ghq list | fzf --query $query | read line
 
   if [ $line ]
     set full_path (ghq list --full-path --exact $line)
